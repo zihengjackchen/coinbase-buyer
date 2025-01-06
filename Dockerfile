@@ -25,5 +25,5 @@ RUN crontab /etc/cron.d/crypto-cron
 # Create the log file to be able to run tail
 RUN touch /var/log/cron.log
 
-# Start cron and run in foreground
-CMD cron && tail -f /var/log/cron.log
+# Start cron, echo API key, and run in foreground
+CMD echo "API_KEY=$API_KEY" && cron && tail -f /var/log/cron.log
