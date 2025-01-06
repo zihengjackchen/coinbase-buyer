@@ -1,10 +1,9 @@
-# config.py
-
 # API key and secret
-API_KEY = "organizations/{org_id}/apiKeys/{key_id}"
-API_SECRET = """-----BEGIN EC PRIVATE KEY-----
-YOUR PRIVATE KEY
------END EC PRIVATE KEY-----"""
+import os
+
+# API key and secret from environment variables
+API_KEY = os.getenv("API_KEY")
+API_SECRET = os.getenv("API_SECRET")
 
 # Coin configurations
 COINS = [
