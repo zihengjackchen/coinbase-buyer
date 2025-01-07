@@ -1,3 +1,4 @@
 # crypto-cron
 # Run the script daily at 2 AM UTC
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 0 2 * * * python /app/main.py >> /var/log/cron.log 2>&1
