@@ -1,4 +1,6 @@
 # crypto-cron
-# Run the script daily at 2 AM UTC
+SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-0 2 * * * python /app/main.py >> /var/log/cron.log 2>&1
+
+# Run the script daily at 2 AM UTC with environment variables
+0 2 * * * API_KEY=$API_KEY API_SECRET=$API_SECRET python /app/main.py >> /var/log/cron.log 2>&1
