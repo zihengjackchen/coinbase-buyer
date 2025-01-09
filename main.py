@@ -5,6 +5,11 @@ import math
 import time
 import config
 
+if config.API_KEY and config.API_SECRET:
+    print("API key and secret found.")
+else:
+    raise ValueError("API key and secret not found.")
+
 # Initialize client
 client = RESTClient(api_key=config.API_KEY, api_secret=config.API_SECRET)
 

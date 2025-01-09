@@ -26,4 +26,4 @@ RUN crontab /etc/cron.d/crypto-cron
 RUN touch /var/log/cron.log
 
 # Start cron, echo API key, and run in foreground
-CMD echo "API_KEY=$API_KEY" && cron && tail -f /var/log/cron.log
+CMD ["/bin/bash", "-c", "printenv > /etc/environment && cron && tail -f /var/log/cron.log"]
