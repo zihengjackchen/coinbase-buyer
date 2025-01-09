@@ -5,9 +5,7 @@ import math
 import time
 import config
 
-if config.API_KEY and config.API_SECRET:
-    print("API key and secret found.")
-else:
+if not config.API_KEY or not config.API_SECRET:
     raise ValueError("API key and secret not found.")
 
 # Initialize client

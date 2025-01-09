@@ -3,5 +3,5 @@
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-# Run the script every minute
-* * * * * /bin/bash -c ". /etc/environment && echo \"API_KEY=\$API_KEY, API_SECRET=\$API_SECRET\" >> /var/log/cron.log && python /app/main.py >> /var/log/cron.log 2>&1"
+# Run the script daily at 2 AM UTC
+0 2 * * * /bin/bash -c ". /etc/environment && python /app/main.py >> /var/log/cron.log 2>&1"
