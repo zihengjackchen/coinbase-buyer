@@ -1,5 +1,5 @@
-# Use Python 3.9 as the base image
-FROM python:3.9-slim
+# Use Python 3.12 as the base image
+FROM python:3.12-slim
 
 # Install cron and necessary utilities
 RUN apt-get update && apt-get install -y cron && rm -rf /var/lib/apt/lists/*
