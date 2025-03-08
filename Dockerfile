@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y cron && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 # Copy project files
-COPY main.py config.py requirements.txt /app/
+COPY main.py config.py requirements.txt send_to_discord.py /app/
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
