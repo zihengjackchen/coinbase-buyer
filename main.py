@@ -94,15 +94,14 @@ def buy_coin(coin_config):
 
         # Handle order response
         if order['success']:
-            order_id = order['success_response']['order_id']
             send_to_discord(
-                f"Order placed successfully for {product_id} with ID: {order_id}"
-                f" at ${adjusted_price:.2f} for {base_size} units."
-                f" Average 3-day close: ${average_3day_close:.2f}."
+                f"Order placed successfully for {product_id}"
+                f" at ${adjusted_price:.2f} for {usd_to_buy} USD."
+                f" (Average 3-day close: ${average_3day_close:.2f})"
             )
         else:
             error_response = order['error_response']
-            send_to_discord(f"Error placing order for {product_id}:", error_response)
+            send_to_discord(f"Error placing order for {product_id}: {error_response}")
 
     except Exception as e:
         send_to_discord(f"Failed to place order for {product_id}: {e}")
