@@ -4,6 +4,7 @@ import os
 # API key and secret from environment variables
 API_KEY = os.getenv("API_KEY")
 API_SECRET = os.getenv("API_SECRET")
+WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 
 # Coin configurations
 COINS = [

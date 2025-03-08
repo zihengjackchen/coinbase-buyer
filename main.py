@@ -4,6 +4,7 @@ import time
 import datetime
 import config
 from typing import Optional
+from send_to_discord import send_to_discord
 
 # Initialize client
 client = RESTClient(api_key=config.API_KEY, api_secret=config.API_SECRET)
@@ -29,11 +30,11 @@ def get_average_close_price(product_id: str, hours: int = 72) -> Optional[float]
             limit=hours
         )
     except Exception as e:
-        print(f"Error fetching historical candles for {product_id}: {e}")
+        send_to_discord(f"Error fetching historical candles for {product_id}: {e}")
         return None
 
     if not candles:
-        print(f"No historical data available for {product_id}")
+        send_to_discord(f"No historical data available for {product_id}")
         return None
 
     closes = [float(candle["close"]) for candle in candles["candles"]]
@@ -53,19 +54,19 @@ def buy_coin(coin_config):
         product = client.get_product(product_id)
         current_price = float(product["price"])
     except Exception as e:
-        print(f"Error fetching price for {product_id}: {e}")
+        send_to_discord(f"Error fetching price for {product_id}: {e}")
         return
 
     # Get average close price of the last 3 days
     average_3day_close = get_average_close_price(product_id)
 
     if average_3day_close is None:
-        print(f"Could not fetch historical data for {product_id}, skipping buy.")
+        send_to_discord(f"Could not fetch historical data for {product_id}, skipping buy.")
         return
 
     # Check conditions to decide whether to buy
     if current_price > price_threshold and current_price > average_3day_close:
-        print(
+        send_to_discord(
             f"Skipping order for {product_id} because current price "
             f"(${current_price:.2f}) is not below threshold "
             f"(${price_threshold:.2f}) or below 3-day avg "
@@ -93,14 +94,17 @@ def buy_coin(coin_config):
 
         # Handle order response
         if order['success']:
-            order_id = order['success_response']['order_id']
-            print(f"Order placed successfully for {product_id} with ID: {order_id}")
+            send_to_discord(
+                f"Order placed successfully for {product_id}"
+                f" at ${adjusted_price:.2f} for {usd_to_buy} USD."
+                f" (Average 3-day close: ${average_3day_close:.2f})"
+            )
         else:
             error_response = order['error_response']
-            print(f"Error placing order for {product_id}:", error_response)
+            send_to_discord(f"Error placing order for {product_id}: {error_response}")
 
     except Exception as e:
-        print(f"Failed to place order for {product_id}: {e}")
+        send_to_discord(f"Failed to place order for {product_id}: {e}")
 
 # Execute purchases for all configured coins
 if __name__ == "__main__":
