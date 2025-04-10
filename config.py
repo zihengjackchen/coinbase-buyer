@@ -13,13 +13,13 @@ COINS = [
         "usd_to_buy": 10,  # Amount of USD to spend
         "price_adjustment_percentage": 0.01,
         "post_only": True,
-        "price_threshold": 88000  # Price threshold to buy
+        "price_threshold": 83000  # Price threshold to buy
     },
     {
         "product_id": "ETH-USDC",
         "usd_to_buy": 3,
         "price_adjustment_percentage": 0.01,
         "post_only": True,
-        "price_threshold": 2050
+        "price_threshold": 1500
     }
 ]
